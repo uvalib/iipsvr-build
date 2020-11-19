@@ -12,7 +12,8 @@ NAMESPACE=uvadave
 TARGETS=/tmp/iipsvr.$$
 mkdir -p $TARGETS > /dev/null 2>&1
 
-for target in iipsrv.fcgi libopenjp2.so.2.3.1; do
+for target in iipsrv.fcgi libkdu_a63R.so libkdu_v63R.so; do
    $DOCKER_TOOL run -v $TARGETS:/opt/mount --rm --entrypoint cp  $NAMESPACE/$INSTANCE /build/targets/$target /opt/mount/$target
 done
 
+echo "Targets available in $TARGETS on the docker host"
