@@ -12,8 +12,12 @@ NAMESPACE=uvadave
 TARGETS=/tmp/iipsvr.$$
 mkdir -p $TARGETS > /dev/null 2>&1
 
-for target in iipsrv.fcgi libkdu_a63R.so libkdu_v63R.so; do
-   $DOCKER_TOOL run -v $TARGETS:/opt/mount --rm --entrypoint cp  $NAMESPACE/$INSTANCE /build/targets/$target /opt/mount/$target
+for target in /build/targets/iipsrv.fcgi \
+              /build/targets/libkdu_a63R.so \
+              /build/targets/libkdu_v63R.so \
+              /build/kakadu/v6_3_1-00379L/bin/Linux-x86-64-gcc/kdu_compress; do
+   bn=$(basename $target)
+   $DOCKER_TOOL run -v $TARGETS:/opt/mount --rm --entrypoint cp  $NAMESPACE/$INSTANCE $target /opt/mount/${bn}
 done
 
 echo "Targets available in $TARGETS on the docker host"
