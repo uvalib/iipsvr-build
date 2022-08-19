@@ -1,4 +1,4 @@
-FROM centos:7
+FROM public.ecr.aws/docker/library/centos:7
 
 # dependancies
 RUN yum -y update && yum -y install git libtool cmake gcc gcc-c++ libjpeg libjpeg-devel libtiff libtiff-devel make
