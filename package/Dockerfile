@@ -17,6 +17,9 @@ RUN cd $APP_HOME/kakadu/v6_3_1-00379L/make && make -f Makefile-Linux-x86-64-gcc;
 # install iipsrv
 RUN git clone https://github.com/ruven/iipsrv.git
 
+# do the code rewrite to force https id's
+RUN mv $APP_HOME/iipsrv/src/IIIF.cc $APP_HOME/iipsrv/src/IIIF.cc.old && cat $APP_HOME/iipsrv/src/IIIF.cc.old | sed -e 's&"http://" : "https://"&"https://" : "https://"&g' > $APP_HOME/iipsrv/src/IIIF.cc
+
 # and build
 RUN cd $APP_HOME/iipsrv && ./autogen.sh && ./configure --with-kakadu=$APP_HOME/kakadu/v6_3_1-00379L && make clean && make all
 
